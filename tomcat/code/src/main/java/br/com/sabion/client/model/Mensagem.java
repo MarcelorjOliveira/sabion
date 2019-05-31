@@ -16,16 +16,6 @@ public class Mensagem{
 		
 	}
 	
-	public Mensagem(String texto) {
-		this.texto = texto;
-	}
-	
-	public Mensagem(String texto, Bot bot) {
-		this.texto = texto;
-		this.bot = bot;
-	}
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -50,7 +40,6 @@ public class Mensagem{
 	    
 	@ManyToOne
     @JoinColumn(name = "botId")
-	@RestResource(path = "botMensagem", rel="mensagem")
     private Bot bot;
 	
 	public Bot getBot() {
