@@ -28,7 +28,7 @@ public class BotController {
 	}
 
 	@PostMapping(value = "/bot")
-	public Bot adicionarBot(@RequestBody Bot bot) {
+	public Bot adicionaOuAtualizaBot(@RequestBody Bot bot) {
 		return botRepository.save(bot);
 	}
 
