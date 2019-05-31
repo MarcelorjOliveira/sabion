@@ -5,6 +5,8 @@ Foi utilizado Docker para levantar a aplicaçao devido a sua facilidade de confi
 Sou bastante adepto do segundo principio do manifesto agil que e "Software em funcionamento mais que documentação abrangente" então documentar apenas o necessário e o codigo deve ser expressivo o suficiente para ser ententido. Comentários apenas em situações de muito dificil compreensão.
 Seria interessante implementar uma cadeia de testes unitários mas o tempo não me permitiu.
 
+Para rodar executar o comando |docker-compose up| no diretorio sabion.
+
 Funcionalidades da API
 Requisiçoes possiveis do bot
 curl -i -X POST -H "Content-Type:application/json" -d '{"nome": "umBot"}' http://localhost/bots - Cria um bot
