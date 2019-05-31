@@ -21,7 +21,7 @@ services:
             vpcboot:
                 ipv4_address: 14.5.0.5
     bootlocal:
-        image: bootlocal
+        image: businessnewapplication/bootlocal
         ports:
             - "80:8080"
         networks:
