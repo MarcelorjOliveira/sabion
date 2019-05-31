@@ -5,4 +5,6 @@ curl http://localhost/bot/9
 curl -i -X POST -H "Content-Type:application/json" -d '{"nome": "novobot"}' http://localhost/bot
 curl http://localhost/bot/9/deleta
 
+curl -i -X POST -H "Content-Type:application/json" -d '{"text": "textocombot" }' http://localhost/mensagem
+
 

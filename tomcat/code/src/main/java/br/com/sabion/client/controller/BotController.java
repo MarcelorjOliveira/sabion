@@ -1,7 +1,6 @@
 package br.com.sabion.client.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class BotController {
 	private BotRepository botRepository;
 
 	@RequestMapping(value = "/botTeste")
-	public Bot planetas() {
+	public Bot botTeste() {
 		Bot bot = new Bot("nome1");
 		botRepository.save(bot);
 		return bot;
@@ -48,8 +47,8 @@ public class BotController {
 	}
 
 	@RequestMapping(value = "/listarBots")
-	public List<Bot> listarBots() {
-		List<Bot> bots = new ArrayList<Bot>();
+	public Iterable<Bot> listarBots() {
+		Iterable<Bot> bots = new ArrayList<Bot>();
 		bots = botRepository.findAll();
 		return bots;
 	}

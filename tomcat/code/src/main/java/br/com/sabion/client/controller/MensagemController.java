@@ -1,7 +1,6 @@
 package br.com.sabion.client.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class MensagemController {
 	private MensagemRepository mensagemRepository;
 
 	@RequestMapping(value = "/mensagemTeste")
-	public Mensagem planetas() {
+	public Mensagem mensagemTeste() {
 		Mensagem mensagem = new Mensagem("nome1");
 		mensagemRepository.save(mensagem);
 		return mensagem;
@@ -48,8 +47,8 @@ public class MensagemController {
 	}
 
 	@RequestMapping(value = "/listarMensagens")
-	public List<Mensagem> listarMensagens() {
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+	public Iterable<Mensagem> listarMensagens() {
+		Iterable<Mensagem> mensagens = new ArrayList<Mensagem>();
 		mensagens = mensagemRepository.findAll();
 		return mensagens;
 	}
