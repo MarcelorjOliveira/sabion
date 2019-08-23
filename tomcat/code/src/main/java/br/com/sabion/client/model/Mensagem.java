@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.rest.core.annotation.RestResource;
+//import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 public class Mensagem{
