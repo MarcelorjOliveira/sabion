@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"br.com.sabion.controller"})
+//@ComponentScan(basePackages = {"br.com.sabion.controller", "br.com.sabion.client"})
 public class ClientApplication {
 
 

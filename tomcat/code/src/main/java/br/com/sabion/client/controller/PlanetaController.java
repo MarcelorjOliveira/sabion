@@ -1,4 +1,4 @@
-package br.com.sabion.controller;
+package br.com.sabion.client.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +21,16 @@ public class PlanetaController {
 	@Autowired
 	private PlanetaRepository planetaRepository;
 
-	@CrossOrigin(origins = {"http://localhost:8100", "http://localhost:8787"},
-     maxAge = 4800, allowCredentials = "false") 	@RequestMapping(value = "/planetaTeste")
+	@RequestMapping(value = "/planetaTeste")
 	public Planeta planetas() {
 		Planeta planeta = new Planeta("nome1", "usuario1", "terreno1" );
-		planetaRepository.save(planeta);
+		planetaRepository.saveAndFlush(planeta);
 		return planeta;
 
 	}
 	@PostMapping(value="/planeta")
 	public Planeta adicionarPlaneta(@RequestBody Planeta planeta) {
-		return planetaRepository.save(planeta);
+		return planetaRepository.saveAndFlush(planeta);
 	}
 	
 	@RequestMapping(value = "/planeta/{id}")
@@ -58,7 +57,6 @@ public class PlanetaController {
 		}
 		return "Não foi possível deletar porque o planeta não existe"; 
 	}
-	
 	
 	@RequestMapping(value = "/listarPlanetas")
 	public List<Planeta> listarPlanetas() {
