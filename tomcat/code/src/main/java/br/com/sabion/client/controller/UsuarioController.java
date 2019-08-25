@@ -34,8 +34,16 @@ public class UsuarioController {
 	@PostMapping(value="/usuario/adicionar")
 	public Usuario adicionar(@RequestBody Usuario usuario) {
 //curl -i -X POST -H "Content-Type:application/json" -d '{"login": "umbot", "senha":"123"}' http://localhost/usuario/adicionar
-		usuario.setToken(null);
-		return userRepository.saveAndFlush(usuario);
+		Usuario usuarioRetornado = userRepository.buscaLogin(usuario.getLogin());
+		if(usuarioRetornado == null) {
+			usuario.setToken(null);
+			userRepository.saveAndFlush(usuario);
+			
+			usuarioRetornado = usuario;
+		} else {
+			usuarioRetornado = null;
+		}
+		return usuarioRetornado;
 	}
 	
 	@PostMapping(value="/usuario/logar")
