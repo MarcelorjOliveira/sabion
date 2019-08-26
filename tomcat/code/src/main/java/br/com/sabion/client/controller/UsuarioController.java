@@ -36,7 +36,7 @@ public class UsuarioController {
 //curl -i -X POST -H "Content-Type:application/json" -d '{"login": "umbot", "senha":"123"}' http://localhost/usuario/adicionar
 		Usuario usuarioRetornado = userRepository.buscaLogin(usuario.getLogin());
 		if(usuarioRetornado == null) {
-			usuario.setToken(null);
+			usuario.setToken(null);	
 			userRepository.saveAndFlush(usuario);
 			
 			usuarioRetornado = usuario;
@@ -48,7 +48,7 @@ public class UsuarioController {
 	
 	@PostMapping(value="/usuario/logar")
 	public Usuario logar (@RequestBody Usuario usuario) {
-		
+// curl -i -X POST -H "Content-Type:application/json" -d '{"login": "umbot", "senha":"123"}' http://localhost/usuario/logar
 		Usuario usuarioRetornado;
 		
 		// userRepository.buscaPorLoginESenha(usuario);
@@ -62,30 +62,28 @@ public class UsuarioController {
 		return usuarioRetornado;
 	}
 
-	@RequestMapping(value = "/usuario/{id}")
-	public Optional<Usuario> encontraPeloId(@PathVariable Long id){
-		return userRepository.findById(id);
-	}
-	
-	@RequestMapping(value = "/usuario/nome/{nome}")
-	public Usuario encontraPeloNome(@PathVariable String nome){
-		Usuario usuario = new Usuario();   // userRepository.usuarioPeloNome(nome); 
-		if(usuario != null) {
-			return usuario;
+	@PostMapping(value = "/usuario/localizar")
+	public Usuario localizar(@RequestBody Usuario usuario){
+// curl -i -X POST -H "Content-Type:application/json" -d '{"token": "C79CA270-E2DF-49EC-A886-A2B0400CCD75"}' http://localhost/usuario/localizar
+		Optional<Usuario> usuarioRetornado = userRepository.findByToken(usuario.getToken());
+		if(usuarioRetornado != null) {
+			return usuarioRetornado.get();
+		} else {
+			return new Usuario();
 		}
-		return new Usuario();
 	}
 	
-	
-	@RequestMapping(value = "/usuario/{id}/deleta")
-	public String deleta(@PathVariable Long id){
-		Optional<Usuario> usuario = userRepository.findById(id);
-		if (usuario != null) {
-			userRepository.deleteById(id);
-			return "User deletado com sucesso";
+	@PostMapping(value = "/usuario/atualizar")
+	public Usuario atualizar(@RequestBody Usuario usuario){
+// curl -i -X POST -H "Content-Type:application/json" -d '{"token": "C79CA270-E2DF-49EC-A886-A2B0400CCD75"}' http://localhost/usuario/atualiza
+		Optional<Usuario> usuarioRetornado = userRepository.findByToken(usuario.getToken());
+		if(usuarioRetornado != null) {
+			usuario.setId(usuarioRetornado.get().getId());
+			userRepository.saveAndFlush(usuario);
 		}
-		return "Não foi possível deletar porque o usuario não existe"; 
+		return usuario;
 	}
+	
 	
 	@RequestMapping(value = "/listarUsers")
 	public List<Usuario> listarUsers() {
