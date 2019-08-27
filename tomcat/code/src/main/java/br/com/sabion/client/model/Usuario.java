@@ -43,4 +43,6 @@ public class Usuario {
 		this.token = token;
 	}
 	
+	public static String initialDirectory = "/usr/local/tomcat/users/";
+	
 }
