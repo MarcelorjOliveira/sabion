@@ -18,7 +18,9 @@ public class Usuario {
 		return id;
 	}
 	public void setId(long id) {
-		this.id = id;
+		if(id != 0) {
+			this.id = id;
+		}
 	}
 	
 	private String login;
@@ -26,7 +28,9 @@ public class Usuario {
 		return login;
 	}
 	public void setLogin(String login) {
-		this.login = login;
+		if(login != null) {
+			this.login = login;
+		}
 	}
 	
 	private String senha;	
@@ -34,7 +38,9 @@ public class Usuario {
 		return senha;
 	}
 	public void setSenha(String senha) {
-		this.senha = senha;
+		if(senha != null) {
+			this.senha = senha;
+		}
 	}
 
 	private String token;
@@ -42,7 +48,9 @@ public class Usuario {
 		return token;
 	}
 	public void setToken(String token) {
-		this.token = token;
+		if(token != null) {
+			this.token = token;
+		}
 	}
 	
 	private String nome;
@@ -51,7 +59,9 @@ public class Usuario {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		if(nome != null) {
+			this.nome = nome;
+		}
 	}
 	
 	private String marca;
@@ -60,7 +70,9 @@ public class Usuario {
 		return marca;
 	}
 	public void setMarca(String marca) {
-		this.marca = marca;
+		if(marca != null) {
+			this.marca = marca;
+		}
 	}
 
 	private String atividades;
@@ -69,7 +81,9 @@ public class Usuario {
 		return atividades;
 	}
 	public void setAtividades(String atividades) {
-		this.atividades = atividades;
+		if(atividades != null) {
+			this.atividades = atividades;
+		}
 	}
 
 	private String contatos;	
@@ -78,7 +92,9 @@ public class Usuario {
 		return contatos;
 	}
 	public void setContatos(String contatos) {
-		this.contatos = contatos;
+		if(contatos != null) {
+			this.contatos = contatos;
+		}
 	}
 
 	private Date dataCadastro;
@@ -87,7 +103,9 @@ public class Usuario {
 		return dataCadastro;
 	}
 	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
+		if(dataCadastro != null) {
+			this.dataCadastro = dataCadastro;
+		}
 	}
 
 	private String whatsapp;
@@ -96,7 +114,9 @@ public class Usuario {
 		return whatsapp;
 	}
 	public void setWhatsapp(String whatsapp) {
-		this.whatsapp = whatsapp;
+		if(whatsapp != null) {
+			this.whatsapp = whatsapp;
+		}
 	}
 
 	private String facebook;
@@ -105,7 +125,9 @@ public class Usuario {
 		return facebook;
 	}
 	public void setFacebook(String facebook) {
-		this.facebook = facebook;
+		if(facebook != null) {
+			this.facebook = facebook;
+		}
 	}
 
 	private String instagram;	
@@ -114,7 +136,9 @@ public class Usuario {
 		return instagram;
 	}
 	public void setInstagram(String instagram) {
-		this.instagram = instagram;
+		if(instagram != null) {
+			this.instagram = instagram;
+		}
 	}
 	
 }

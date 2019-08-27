@@ -78,8 +78,11 @@ public class UsuarioController {
 // curl -i -X POST -H "Content-Type:application/json" -d '{"token": "C79CA270-E2DF-49EC-A886-A2B0400CCD75"}' http://localhost/usuario/atualiza
 		Optional<Usuario> usuarioRetornado = userRepository.findByToken(usuario.getToken());
 		if(usuarioRetornado != null) {
-			usuario.setId(usuarioRetornado.get().getId());
-			userRepository.saveAndFlush(usuario);
+			usuarioRetornado.get().setNome(usuario.getNome());
+			usuarioRetornado.get().setMarca(usuario.getMarca());
+			usuarioRetornado.get().setAtividades(usuario.getAtividades());
+			usuarioRetornado.get().setContatos(usuario.getContatos());
+			userRepository.saveAndFlush(usuarioRetornado.get());
 		}
 		return usuario;
 	}
