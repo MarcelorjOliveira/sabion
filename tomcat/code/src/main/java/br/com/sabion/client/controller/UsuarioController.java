@@ -1,8 +1,8 @@
 package br.com.sabion.client.controller;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,7 +41,7 @@ curl -i -X POST -H "Content-Type:application/json" -d '{"login": "umbot", "senha
 		Usuario usuarioRetornado = userRepository.buscaLogin(usuario.getLogin());
 		if(usuarioRetornado == null) {
 			usuario.setToken(null);
-			usuario.setDataCadastro(LocalDate.of(2018, 9, 18));
+			usuario.setDataCadastro(new Date());
 			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 			System.out.println(formatter.format(usuario.getDataCadastro()));
 			userRepository.save(usuario);
