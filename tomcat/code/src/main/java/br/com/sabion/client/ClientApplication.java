@@ -1,28 +1,30 @@
 package br.com.sabion.client;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = {"br.com.sabion.controller", "br.com.sabion.client"})
+@EntityScan(
+        basePackageClasses = {ClientApplication.class, Jsr310JpaConverters.class}
+)
+@EnableJpaAuditing
 public class ClientApplication {
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientApplication.class, args);
 	}
-	/*
-		repository.deleteAll();
-
-		repository.save(new Planeta("nome", "clima", "terreno"));
-		repository.save(new Planeta("Marte", "frio", "seco"));
-
-		System.out.println("Planetas found with findAll():");
-		System.out.println("-------------------------------");
-		for (Planeta planeta : repository.findAll()) {
-			System.out.println(planeta);
-		}
-	*/
+	
+    @PostConstruct
+    void setUTCTimezone(){
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    }
 
 }

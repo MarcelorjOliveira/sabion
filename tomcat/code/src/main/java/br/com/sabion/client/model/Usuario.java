@@ -1,7 +1,6 @@
 package br.com.sabion.client.model;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -96,16 +95,15 @@ public class Usuario {
 			this.contatos = contatos;
 		}
 	}
-
-	private Date dataCadastro;
 	
-	public Date getDataCadastro() {
+	@Column(name = "data_cadastro")
+ 	private java.time.LocalDate dataCadastro;
+	
+	public java.time.LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
-	public void setDataCadastro(Date dataCadastro) {
-		if(dataCadastro != null) {
-			this.dataCadastro = dataCadastro;
-		}
+	public void setDataCadastro(java.time.LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	private String whatsapp;
@@ -140,5 +138,7 @@ public class Usuario {
 			this.instagram = instagram;
 		}
 	}
+	
+	public static String initialDirectory = "/usr/local/tomcat/users/";
 	
 }
