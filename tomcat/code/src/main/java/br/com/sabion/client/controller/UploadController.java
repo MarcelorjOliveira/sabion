@@ -29,13 +29,20 @@ public class UploadController {
     public String index() {
         return Routes.uploadMain;
     }
-
+    
+    @RequestMapping(Routes.uploadForm)
+    public String upload() {
+        return Routes.uploadForm;
+    }
+    
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
+    public String singleFileUpload(@RequestParam("foto") MultipartFile file,
                                    RedirectAttributes redirectAttributes,
                                    HttpServletRequest request) {
+    	//testar system out println
+    	System.out.println("Diretorio:");
 /*
-curl -F 'file=@/home/computador/Pictures/caso.png' http://localhost/upload?token=
+curl -F 'file=@/home/computador/Pictures/mastro.png' http://localhost/upload?token=4829448E-BAB4-4E59-B6A3-9C996B72DB71
 curl --cookie-jar newcookies.txt -F 'file=@/home/computador/Pictures/caso.png' http://localhost/upload
  */
     	String token = request.getParameter("token");
@@ -46,7 +53,7 @@ curl --cookie-jar newcookies.txt -F 'file=@/home/computador/Pictures/caso.png' h
 		
 			String userId = Long.toString(usuario.getId());    	
 	    	
-			String diretorio =  Usuario.initialDirectory + userId + "/" + "gallery/";    	
+			String diretorio =  Usuario.initialDirectory + userId + "/" + "gallery/";
 	    	
 	        if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
