@@ -18,6 +18,6 @@ public class Routes {
                                
     						   upload = program + "/upload",
     						   uploadMain = main + "/upload",
-    						   uploadForm = program + "/uploadForm";
+    						   uploadForm = program + "/uploadform";
 }
 

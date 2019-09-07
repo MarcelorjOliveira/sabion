@@ -32,7 +32,8 @@ public class UploadController {
     
     @RequestMapping(Routes.uploadForm)
     public String upload() {
-        return Routes.uploadForm;
+    	//thymelief chama os templates sem a / (barra)
+    	return "uploadform";
     }
     
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

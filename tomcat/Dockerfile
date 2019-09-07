@@ -1,13 +1,9 @@
 # Alpine Linux with OpenJDK JRE
-FROM openjdk:8-jre-alpine
+FROM adoptopenjdk:8u222-b10-jre-openj9-0.15.1-bionic
+#FROM openjdk:8-jre-alpine
 RUN mkdir -p game
 # copy WAR into image
 ADD code/target /game 
 # run application with this command line 
-CMD ["/usr/bin/java", "-jar", "/game/client.jar"]
-#FROM tomcat:7.0
-
-#ADD config/server.xml /usr/local/tomcat/webapps/config
-
-#RUN rm -rf /usr/local/tomcat/webapps/ROOT
+CMD ["java", "-jar", "/game/client.jar"]
 
