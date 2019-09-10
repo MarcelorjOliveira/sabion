@@ -1,6 +1,8 @@
 package br.com.sabion.client.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,6 +10,7 @@ import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +20,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.sabion.client.model.Imagem;
 import br.com.sabion.client.model.Usuario;
 import br.com.sabion.client.repository.UsuarioRepository;
 
 @Controller
-public class UploadController {
+public class GaleriaController {
 
 	@Autowired
 	private UsuarioRepository userRepository;
-
+    
+	@RequestMapping("/download")
+	@ResponseBody
+    public Imagem downloadFile() {		
+		String diretorio =  Usuario.initialDirectory + "/" + "1" + "/" + "gallery/mastro2.png";
+		
+		File f =  new File(diretorio);
+		
+		String encodedfile = null;
+        try {
+            FileInputStream fileInputStreamReader = new FileInputStream(f);
+            byte[] bytes = new byte[(int)f.length()];
+            fileInputStreamReader.read(bytes);
+            encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+		Imagem imagem = new Imagem();
+		imagem.setId(1);
+		imagem.setConteudo("data:image/png;base64,"+encodedfile);
+        
+		return imagem;
+    }
+	
+	
     @RequestMapping("/uploadsingle")
     public String index() {
         return Routes.uploadMain;
