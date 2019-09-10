@@ -139,6 +139,5 @@ public class Usuario {
 		}
 	}
 	
-	public static String initialDirectory = "/usr/local/tomcat/users/";
-	
+	public static String initialDirectory = "/game/externo";
 }

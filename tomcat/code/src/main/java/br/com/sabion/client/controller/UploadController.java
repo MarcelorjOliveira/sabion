@@ -42,8 +42,8 @@ public class UploadController {
     public String singleFileUpload(@RequestParam("foto") MultipartFile file,
                                    RedirectAttributes redirectAttributes,
                                    HttpServletRequest request) {
-    	//testar system out println
-    	System.out.println("Diretorio:");
+    	// testar system out println
+    	// System.out.println("Diretorio:");
 /*
 curl -F 'file=@/home/computador/Pictures/mastro.png' http://localhost/upload?token=4829448E-BAB4-4E59-B6A3-9C996B72DB71
  */
@@ -57,7 +57,7 @@ curl -F 'file=@/home/computador/Pictures/mastro.png' http://localhost/upload?tok
 		
 			String userId = Long.toString(usuario.getId());    	
 	    	
-			String diretorio =  Usuario.initialDirectory + userId + "/" + "gallery/";
+			String diretorio =  Usuario.initialDirectory + "/" + userId + "/" + "gallery/";
 	    	
 	        if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -78,8 +78,10 @@ curl -F 'file=@/home/computador/Pictures/mastro.png' http://localhost/upload?tok
 	            redirectAttributes.addFlashAttribute("message", 
 	                        "You successfully uploaded '" + file.getOriginalFilename() + "'");
 	            
-	            message = "GetCwd : "+new java.io.File(".").getCanonicalPath()+" You successfully uploaded '"+diretorio + file.getOriginalFilename() + "'";
+	            // message = "GetCwd : "+new java.io.File(".").getCanonicalPath()+" You successfully uploaded '"+diretorio + file.getOriginalFilename() + "'";
 	
+	            message = "2";
+	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
