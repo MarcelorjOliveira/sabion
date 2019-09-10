@@ -7,3 +7,4 @@ ADD code/target /game
 # run application with this command line 
 CMD ["java", "-jar", "/game/client.jar"]
 
+
