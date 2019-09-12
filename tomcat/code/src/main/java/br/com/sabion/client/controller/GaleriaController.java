@@ -79,6 +79,47 @@ public class GaleriaController {
 
 		return galeria;
 	}
+	
+	@RequestMapping("/downloadFotoPerfil")
+	@ResponseBody
+	public Imagem downloadFotoPerfil(HttpServletRequest request) {
+		String token = request.getParameter("token");
+
+		String message = "";
+		
+		Imagem imagem = new Imagem();
+		imagem.setId(1);
+
+		Usuario usuario = userRepository.findByToken(token).get();
+
+		if (usuario != null) {
+
+			String userId = Long.toString(usuario.getId());
+
+			String diretorio = Usuario.initialDirectory + "/" + userId + "/perfil/perfil.png";
+			
+			File diretorioApontado = new File(diretorio);
+
+			File f = new File(diretorio);
+
+			String encodedfile = null;
+			try {
+				FileInputStream fileInputStreamReader = new FileInputStream(f);
+				byte[] bytes = new byte[(int) f.length()];
+				fileInputStreamReader.read(bytes);
+				encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+				imagem.setConteudo("data:image/png;base64," + encodedfile);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return imagem;
+	}
 
 	@RequestMapping("/downloadAntigo")
 	@ResponseBody
@@ -172,10 +213,64 @@ public class GaleriaController {
 
 		return message;
 	}
-
+	
 	@RequestMapping("/uploadStatus")
 	public String uploadStatus() {
 		return "/main/uploadStatus";
 	}
+	
+	@RequestMapping(value = "/uploadFotoPerfil", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadFotoPerfil(@RequestParam("foto") MultipartFile file, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
+		// testar system out println
+		// System.out.println("Diretorio:");
+		/*
+		 * curl -F 'file=@/home/computador/Pictures/mastro.png'
+		 * http://localhost/uploadFotoPerfil?token=4829448E-BAB4-4E59-B6A3-9C996B72DB71
+		 */
+		String token = request.getParameter("token");
 
+		String message = "";
+
+		Usuario usuario = userRepository.findByToken(token).get();
+
+		if (usuario != null) {
+
+			String userId = Long.toString(usuario.getId());
+
+			String diretorio = Usuario.initialDirectory + "/" + userId + "/perfil/";
+
+			if (file.isEmpty()) {
+				redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+				message = "Please select a file to upload";
+				// return "redirect:uploadStatus";
+			}
+
+			try {
+				File fileDirectory = new File(diretorio);
+
+				fileDirectory.mkdirs();
+
+				// Get the file and save it somewhere
+				byte[] bytes = file.getBytes();
+				Path path = Paths.get(diretorio + "perfil.png");
+				Files.write(path, bytes);
+
+				redirectAttributes.addFlashAttribute("message",
+						"Foto perfil atualizado com sucesso");
+
+				// message = "GetCwd : "+new java.io.File(".").getCanonicalPath()+" You
+				// successfully uploaded '"+diretorio + file.getOriginalFilename() + "'";
+
+				message = "2";
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return message;
+	}
+	
 }
